@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [Header("Builder")]
-    [Space(8)]
-
-    public GameObject tilePreFab;
+    
+    [Header("Level Builder")]
+    
+    public GameObject tilePrefab;
 
     public int levelWidth;
     public int levelLength;
+    public Transform tilesHolder;
+    public float tileSize = 1;
 
     private void Start()
     {
@@ -19,23 +21,20 @@ public class GameManager : MonoBehaviour
 
     public void CreateLevel()
     {
-        for(int x = 0, x < levelWidth, x++)
+        for (int i = 0; i < levelWidth; i++)
         {
-            for(int z = 0, z < levelLength, z++)
+            for (int j = 0; j < levelLength; j++)
             {
-                SpawnTile(x, z);
-
+                SpawnTile(i*tileSize, j*tileSize);
             }
-
         }
-
     }
-    TileObject SpawnTile(float xPos, float zPos)
+
+    TileObject SpawnTile(float x, float z)
     {
-        GameObject tmpTile = Instantiate(tilePreFab);
-
-        tmpTile.transform.position = new Vector3(xPos, 0, zPos);
-
-        return tmpTile.GetComponent<TileObject>();
+        GameObject tile = Instantiate(tilePrefab);
+        tile.transform.position = new Vector3(x, 0, z);
+        tile.transform.SetParent(tilesHolder);
+        return tile.GetComponent<TileObject>();
     }
 }
