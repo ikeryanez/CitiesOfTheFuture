@@ -348,6 +348,7 @@
 "Assets/Scripts/Building.cs"
 "Assets/Scripts/BuildingsDatabase.cs"
 "Assets/Scripts/GameManager.cs"
+"Assets/Scripts/ResorceManager.cs"
 "Assets/Scripts/Tile.cs"
 "Assets/Scripts/TileObject.cs"
 -langversion:9.0
