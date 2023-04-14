@@ -16,6 +16,25 @@ public class ResorceManager : MonoBehaviour
     public int premiumCurrency = 0;
     public int standardCurrency = 0;
 
+    public static ResorceManager Instance;
+
+    public bool debugBool = false;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
+    private void Update()
+    {
+        if(debugBool)
+        {
+            PrintCurrentResources();
+            debugBool = false;
+
+        }
+    }
+
     public void AddWood(int woodToAdd)
     {
         wood += woodToAdd;
@@ -35,4 +54,14 @@ public class ResorceManager : MonoBehaviour
     {
         premiumCurrency += premiumCurrencyToAdd;
     }
+    void PrintCurrentResources()
+    {
+        Debug.Log("wood" + wood);
+        Debug.Log("stone" + stone);
+        Debug.Log("standard" + standardCurrency);
+        Debug.Log("premium" + premiumCurrency);
+
+    }
+
+
 }

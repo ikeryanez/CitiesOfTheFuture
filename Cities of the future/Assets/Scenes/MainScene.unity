@@ -267,15 +267,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilePrefab: {fileID: 5155986456356179425, guid: c1d0dd0f44cbd1f4ea88b4170f6f66ea, type: 3}
-  levelWidth: 10
-  levelLength: 10
+  levelWidth: 20
+  levelLength: 20
   tilesHolder: {fileID: 1520598039}
   tileSize: 1
+  tileEndHeight: 0.8
   woodPrefab: {fileID: 6286057126763749633, guid: b38c795a238881741ad992f8ff7bd512, type: 3}
   rockPrefab: {fileID: 5015873662554760786, guid: 23ee0ac46b1d1e741932bb1150b77e2c, type: 3}
-  obstacleChance: 0
-  xBounds: 3
-  zBounds: 3
+  obstacleChance: 0.5
+  xBounds: 4
+  zBounds: 4
 --- !u!114 &140400965
 MonoBehaviour:
   m_ObjectHideFlags: 0

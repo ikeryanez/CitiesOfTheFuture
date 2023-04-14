@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public int levelLength;
     public Transform tilesHolder;
     public float tileSize = 1;
+    public float tileEndHeight = 1;
 
     [Header("Resources")]
     
@@ -36,7 +37,7 @@ public class GameManager : MonoBehaviour
             for (int j = 0; j < levelLength; j++)
             {
                 TileObject spawnedTile = SpawnTile(i*tileSize, j*tileSize);
-                if (i<xBounds || j<zBounds)
+                if (i<xBounds || j<zBounds || j>= (levelLength-zBounds) || i>= (levelWidth-xBounds) ) 
                 {
                     spawnedTile.data.StarterTileValue(false);
                 }
@@ -46,8 +47,12 @@ public class GameManager : MonoBehaviour
                     bool spawnObstacle = Random.value <= obstacleChance;
                     if (spawnObstacle)
                     {
+                        spawnedTile.data.setOccupied(Tile.ObstacleType.Resource);
+                        SpawnObstacle(spawnedTile.transform.position.x, spawnedTile.transform.position.z );
                         //Spawn obstacle
-                        Debug.Log("Spawned obstacle on " + spawnedTile.gameObject.name);
+                        //Debug.Log("Spawned obstacle on " + spawnedTile.gameObject.name);
+
+                        //spawnedTile.gameObject.GetComponent<MeshRenderer>().material.color = Color.red;
                     }
                 }
             }
@@ -64,5 +69,24 @@ public class GameManager : MonoBehaviour
         tile.name = "Tile " + x + "-" + z;
             
         return tile.GetComponent<TileObject>();
+    }
+
+    public void SpawnObstacle(float x, float z)
+    {
+        bool isWood = Random.value <= 0.5f;
+        GameObject spawnedObstacle = null;
+
+        if(isWood)
+        {
+            spawnedObstacle = Instantiate(woodPrefab);
+        
+
+        }
+        else
+        {
+            spawnedObstacle = Instantiate(rockPrefab);
+
+        }
+        spawnedObstacle.transform.position = new Vector3(x, tileEndHeight, z);
     }
 }
