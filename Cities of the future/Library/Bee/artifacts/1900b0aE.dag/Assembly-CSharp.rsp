@@ -356,6 +356,7 @@
 "Assets/Scripts/ResorceManager.cs"
 "Assets/Scripts/Tile.cs"
 "Assets/Scripts/TileObject.cs"
+"Assets/Scripts/UIManager.cs"
 "Assets/Scripts/Volume.cs"
 -langversion:9.0
 

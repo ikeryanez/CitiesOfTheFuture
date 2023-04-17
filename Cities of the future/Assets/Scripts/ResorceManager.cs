@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class ResorceManager : MonoBehaviour
 {
-    [Header("Resources")] 
+    [Header("Resources")]
+    [Space(8)] 
     
     public int maxWood;
     public int maxStone;
     public int maxPc;
     public int maxSc;
+    
     
     public int wood = 0;
     public int stone = 0;
@@ -35,25 +37,65 @@ public class ResorceManager : MonoBehaviour
         }
     }
 
-    public void AddWood(int woodToAdd)
+    public bool AddWood(int woodToAdd)
     {
+        if((wood + woodToAdd) <= maxWood)
+        {
         wood += woodToAdd;
+        UIManager.Instance.UpdateWoodUI(wood, maxWood);
+
+        return true;
+
+        }
+        else
+        {
+            return false;
+        }
+        
     }
     
-    public void AddStone(int stoneToAdd)
+    public bool AddStone(int stoneToAdd)
     {
-        stone += stoneToAdd;
+        if((stone + stoneToAdd) <= maxStone)
+        {
+            stone += stoneToAdd;
+            UIManager.Instance.UpdateStoneUI(stone, maxStone);
+            return true;
+        }
+        else{
+            return false;
+        }
+        
     }
     
-    public void AddStandardCurrency(int standardCurrencyToAdd)
+    public bool AddStandardCurrency(int standardCurrencyToAdd)
     {
-        standardCurrency += standardCurrencyToAdd;
+        if((standardCurrency + standardCurrencyToAdd) <= maxSc)
+        {
+            standardCurrency += standardCurrencyToAdd;
+            UIManager.Instance.UpdateStandardCUI(standardCurrency, maxSc);
+            return true;
+        }
+        else{
+            return false;
+        }
+        
     }
     
-    public void AddPremiumCurrency(int premiumCurrencyToAdd)
+    public bool AddPremiumCurrency(int premiumCurrencyToAdd)
     {
-        premiumCurrency += premiumCurrencyToAdd;
+        if((premiumCurrency + premiumCurrencyToAdd) <= maxPc)
+        {
+            premiumCurrency += premiumCurrencyToAdd;
+            UIManager.Instance.UpdatePremiumCUI(premiumCurrency, maxPc);
+            return true;
+        }
+        else{
+            return false;
+        }
+        
     }
+    
     void PrintCurrentResources()
     {
         Debug.Log("wood" + wood);

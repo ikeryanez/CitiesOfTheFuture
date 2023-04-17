@@ -12,18 +12,31 @@ public class ObstacleObject : MonoBehaviour
     private void OnMouseDown()
     {
         Debug.Log("Clicked on " + gameObject.name);
+
+        bool usedResource = false;
+
         switch(obstacleType)
         {
             case ObstacleType.Wood:
-                ResorceManager.Instance.AddWood(resourceAmount);
+                
+                usedResource = ResorceManager.Instance.AddWood(resourceAmount);
                 break;
 
             case ObstacleType.Rock:
-                ResorceManager.Instance.AddStone(resourceAmount);
+                
+                usedResource = ResorceManager.Instance.AddStone(resourceAmount);
                 break;
             
 
         }
+        if(usedResource){
+            Destroy(gameObject);
+        }
+        else{
+            Debug.Log("could not destroy");
+        }
+
+        
     }
 
     public enum ObstacleType
