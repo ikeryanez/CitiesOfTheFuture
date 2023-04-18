@@ -15,10 +15,15 @@ public class GameManager : MonoBehaviour
     public float tileSize = 1;
     public float tileEndHeight = 1;
 
+    [Space(8)]
+    public Tile[,] tileGrid = new Tile[0,0];
+
     [Header("Resources")]
+    [Space(8)]
     
     public GameObject woodPrefab;
     public GameObject rockPrefab;
+    public Transform resourcesHolder;
 
     [Range(0, 1)] public float obstacleChance = 0.3f;
 
@@ -32,11 +37,20 @@ public class GameManager : MonoBehaviour
 
     public void CreateLevel()
     {
+        List<TileObject> visualGrid = new List<TileObject>();
+
+
+
         for (int i = 0; i < levelWidth; i++)
         {
             for (int j = 0; j < levelLength; j++)
             {
                 TileObject spawnedTile = SpawnTile(i*tileSize, j*tileSize);
+                spawnedTile.x = x;
+                spawnedTile.z = z;
+
+
+
                 if (i<xBounds || j<zBounds || j>= (levelLength-zBounds) || i>= (levelWidth-xBounds) ) 
                 {
                     spawnedTile.data.StarterTileValue(false);
@@ -55,8 +69,11 @@ public class GameManager : MonoBehaviour
                         //spawnedTile.gameObject.GetComponent<MeshRenderer>().material.color = Color.red;
                     }
                 }
+                visualGrid.Add(spawnedTile);
             }
         }
+
+        CreateGrid();
     }
 
     TileObject SpawnTile(float x, float z)
@@ -79,14 +96,35 @@ public class GameManager : MonoBehaviour
         if(isWood)
         {
             spawnedObstacle = Instantiate(woodPrefab);
+            spawnedObstacle.name = "Wood" + x + "-" + z;
         
 
         }
         else
         {
             spawnedObstacle = Instantiate(rockPrefab);
+            spawnedObstacle.name = "Stone" + x + "-" + z;
 
         }
         spawnedObstacle.transform.position = new Vector3(x, tileEndHeight, z);
+        spawnedObstacle.transform.SetParent(resourcesHolder);
+        
+    }
+
+    public void CreateGrid(List<TileObject> refVisualGrid)
+    {
+        tileGrid = new Tile[levelWidth, levelLength];
+
+        for(int i=0; i<refVisualGrid.Count;i++)
+        {
+            if(refVisualGrid[i].x == tileGrid[refVisualGrid[i].x, refVisualGrid[i].z])
+            {
+                
+            }
+
+        }
+
+       
+
     }
 }
