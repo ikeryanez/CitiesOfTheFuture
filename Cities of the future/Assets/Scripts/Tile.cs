@@ -5,6 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class Tile
 {
+    
     public Building buildingRef;
     public ObstacleType obstacleType;
     bool isStarterTile = true;

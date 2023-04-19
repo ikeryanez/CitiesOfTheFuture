@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class ObstacleObject : MonoBehaviour
 {
-
+    public TileObject refTile;
     public ObstacleType obstacleType;
     public int resourceAmount = 10;
+
+    
 
 
     private void OnMouseDown()
@@ -30,6 +32,7 @@ public class ObstacleObject : MonoBehaviour
 
         }
         if(usedResource){
+            refTile.data.cleanTile();
             Destroy(gameObject);
         }
         else{
@@ -38,6 +41,12 @@ public class ObstacleObject : MonoBehaviour
 
         
     }
+    public void SetTileReference(TileObject obj)
+    {
+        refTile = obj;
+
+    }
+    
 
     public enum ObstacleType
     {

@@ -9,6 +9,9 @@ public class Building
     public int width = 0;
     public int length = 0;
 
+    public GameObject buildingModel;
+    public float yPadding = 0;
+
     public ResourceType resourceType = ResourceType.None;
 
     public enum ResourceType

@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     public float tileEndHeight = 1;
 
     [Space(8)]
-    public Tile[,] tileGrid = new Tile[0,0];
+    public TileObject[,] tileGrid = new TileObject[0,0];
 
     [Header("Resources")]
     [Space(8)]
@@ -29,10 +29,21 @@ public class GameManager : MonoBehaviour
 
     public int xBounds = 3;
     public int zBounds = 3;
+
+    [Space(8)]
+
+    public BuildingObject buildingToPlace;
+    public static GameManager Instance;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
     
     private void Start()
     {
         CreateLevel();
+         
     }
 
     public void CreateLevel()
@@ -41,17 +52,17 @@ public class GameManager : MonoBehaviour
 
 
 
-        for (int i = 0; i < levelWidth; i++)
+        for (int x = 0; x < levelWidth; x++)
         {
-            for (int j = 0; j < levelLength; j++)
+            for (int z = 0; z < levelLength; z++)
             {
-                TileObject spawnedTile = SpawnTile(i*tileSize, j*tileSize);
+                TileObject spawnedTile = SpawnTile(x*tileSize, z*tileSize);
                 spawnedTile.x = x;
                 spawnedTile.z = z;
 
 
 
-                if (i<xBounds || j<zBounds || j>= (levelLength-zBounds) || i>= (levelWidth-xBounds) ) 
+                if (x<xBounds || z<zBounds || z>= (levelLength-zBounds) || x>= (levelWidth-xBounds) ) 
                 {
                     spawnedTile.data.StarterTileValue(false);
                 }
@@ -62,7 +73,12 @@ public class GameManager : MonoBehaviour
                     if (spawnObstacle)
                     {
                         spawnedTile.data.setOccupied(Tile.ObstacleType.Resource);
-                        SpawnObstacle(spawnedTile.transform.position.x, spawnedTile.transform.position.z );
+
+                        ObstacleObject tmpObstacle = SpawnObstacle(spawnedTile.transform.position.x, spawnedTile.transform.position.z );
+                        tmpObstacle.SetTileReference(spawnedTile);
+
+
+                
                         //Spawn obstacle
                         //Debug.Log("Spawned obstacle on " + spawnedTile.gameObject.name);
 
@@ -73,7 +89,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        CreateGrid();
+        CreateGrid(visualGrid);
     }
 
     TileObject SpawnTile(float x, float z)
@@ -88,7 +104,7 @@ public class GameManager : MonoBehaviour
         return tile.GetComponent<TileObject>();
     }
 
-    public void SpawnObstacle(float x, float z)
+    ObstacleObject SpawnObstacle(float x, float z)
     {
         bool isWood = Random.value <= 0.5f;
         GameObject spawnedObstacle = null;
@@ -108,23 +124,46 @@ public class GameManager : MonoBehaviour
         }
         spawnedObstacle.transform.position = new Vector3(x, tileEndHeight, z);
         spawnedObstacle.transform.SetParent(resourcesHolder);
+
+        return spawnedObstacle.GetComponent<ObstacleObject>();
         
     }
 
     public void CreateGrid(List<TileObject> refVisualGrid)
     {
-        tileGrid = new Tile[levelWidth, levelLength];
+        tileGrid = new TileObject[levelWidth, levelLength];
 
-        for(int i=0; i<refVisualGrid.Count;i++)
+        for(int x=0; x<levelWidth;x++)
         {
-            if(refVisualGrid[i].x == tileGrid[refVisualGrid[i].x, refVisualGrid[i].z])
+            for(int z=0; z<levelLength;z++)
             {
-                
+                tileGrid[x,z] = refVisualGrid.Find(v => v.x == x && v.z == z);
+                //Debug.Log(tileGrid[x,z].gameObject.name);
             }
+            
 
         }
 
        
 
+    }
+    public void SpawnBuilding(BuildingObject building, List<TileObject> tiles)
+    {
+        GameObject spawnedBuilding = Instantiate(building.gameObject);
+        float sumX = 0;
+        float sumZ = 0;
+
+       
+        for(int i = 0; i < tiles.Count ; i++){
+            sumX += tiles[i].x;
+            sumZ += tiles[i].z;
+
+            tiles[i].data.setOccupied(Tile.ObstacleType.Building);
+            Debug.Log("placed building in" + tiles[i].x + "-" + tiles[i].z);
+            
+        }
+        Vector3 position = new Vector3((sumX/tiles.Count), tileEndHeight + building.data.yPadding, (sumZ/tiles.Count));
+
+        spawnedBuilding.transform.position = position;
     }
 }

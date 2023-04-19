@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 6737570451563109732}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 95.475006, y: 14.450001, z: -30.7}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6036988315375389825}
@@ -46,9 +46,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data:
-    buildingID: 0
-    width: 0
-    length: 0
+    buildingID: 3
+    width: 2
+    length: 3
+    buildingModel: {fileID: 6737570451563109732}
     resourceType: 0
 --- !u!1001 &6036988315375523329
 PrefabInstance:
