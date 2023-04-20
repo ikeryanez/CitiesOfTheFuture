@@ -53,7 +53,12 @@ public class ResorceManager : MonoBehaviour
         }
         
     }
-    
+    public void IncreaseMaxWood(int amount)
+    {
+        maxWood += amount;
+        UIManager.Instance.UpdateWoodUI(wood, maxWood);
+
+    }
     public bool AddStone(int stoneToAdd)
     {
         if((stone + stoneToAdd) <= maxStone)
@@ -66,6 +71,12 @@ public class ResorceManager : MonoBehaviour
             return false;
         }
         
+    }
+    public void IncreaseMaxStone(int amount)
+    {
+        maxStone += amount;
+        UIManager.Instance.UpdateStoneUI(stone, maxStone);
+
     }
     
     public bool AddStandardCurrency(int standardCurrencyToAdd)

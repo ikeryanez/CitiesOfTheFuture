@@ -50,7 +50,12 @@ MonoBehaviour:
     width: 2
     length: 3
     buildingModel: {fileID: 6737570451563109732}
-    resourceType: 0
+    yPadding: 0
+    resourceType: 3
+    storageType: 1
+  resource: 100
+  resourceLimit: 0
+  generationSpeed: 0
 --- !u!1001 &6036988315375523329
 PrefabInstance:
   m_ObjectHideFlags: 0
