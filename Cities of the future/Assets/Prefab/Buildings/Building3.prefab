@@ -53,6 +53,7 @@ MonoBehaviour:
     yPadding: 0
     resourceType: 3
     storageType: 1
+    refOfBuilding: {fileID: 7318439811565999543}
   resource: 100
   resourceLimit: 0
   generationSpeed: 0

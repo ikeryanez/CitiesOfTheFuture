@@ -26,8 +26,9 @@ public class TileObject : MonoBehaviour
 
                 bool canPlaceBuildingHere = true;
 
-
-                for(int i = x; i < x+GameManager.Instance.buildingToPlace.data.width; i++)
+                try
+                {
+                    for(int i = x; i < x+GameManager.Instance.buildingToPlace.data.width; i++)
                 {
                     
 
@@ -52,6 +53,17 @@ public class TileObject : MonoBehaviour
                         break;
                     }
                 }
+
+                }
+                catch(System.IndexOutOfRangeException)
+                {
+                    Debug.Log("There were no tiles");
+                    return;
+
+                }
+
+
+                
                 if(canPlaceBuildingHere)
                 {
                     GameManager.Instance.SpawnBuilding(GameManager.Instance.buildingToPlace, iteratedTiles);

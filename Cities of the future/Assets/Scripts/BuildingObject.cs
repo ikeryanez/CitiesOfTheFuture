@@ -15,6 +15,8 @@ public class BuildingObject : MonoBehaviour
 
     Coroutine buildingBehaviour;
 
+   
+
     private void Start()
     {
         if(data.resourceType == Building.ResourceType.Standard || data.resourceType==Building.ResourceType.Premium){

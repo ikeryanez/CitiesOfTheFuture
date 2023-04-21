@@ -15,6 +15,9 @@ public class Building
     public ResourceType resourceType = ResourceType.None;
     public StorageType storageType = StorageType.None;
 
+    //[HideInInspector]
+    public BuildingObject refOfBuilding;
+
     public enum ResourceType
     {
         None,
