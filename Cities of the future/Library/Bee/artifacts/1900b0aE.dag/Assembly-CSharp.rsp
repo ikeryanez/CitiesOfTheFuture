@@ -353,6 +353,7 @@
 "Assets/Scripts/LogicQuality.cs"
 "Assets/Scripts/LogicVolume.cs"
 "Assets/Scripts/MainMenu.cs"
+"Assets/Scripts/MenuPause.cs"
 "Assets/Scripts/ObstacleObject.cs"
 "Assets/Scripts/ResorceManager.cs"
 "Assets/Scripts/Tile.cs"
