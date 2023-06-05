@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     private int buildID = 0;
     public int rock = 0;
     public int wood = 0;
+    public bool city = true;
     private void Awake()
     {
         if (instance == null)

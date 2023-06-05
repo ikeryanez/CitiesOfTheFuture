@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
@@ -9,6 +10,9 @@ public class UIManager : MonoBehaviour
     public TMP_Text wood;
     public Mensaje mensege;
     public GameObject canvas;
+    public Button bot;
+    public Sprite city;
+    public Sprite forest;
     void Start()
     {
         rock.text = GameManager.instance.rock.ToString();
@@ -25,5 +29,15 @@ public class UIManager : MonoBehaviour
     public void newMensege(string mensaje)
     {
         //var temp = Instantiate(mensege).transform.parent = canvas.transform;
+    }
+    public void changeCity()
+    {
+        GameManager.instance.city = !GameManager.instance.city;
+        if (GameManager.instance.city)
+        {
+            bot.image.sprite = city;
+        }
+        else
+            bot.image.sprite = forest;
     }
 }
