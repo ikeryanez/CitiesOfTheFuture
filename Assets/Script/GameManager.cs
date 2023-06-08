@@ -13,6 +13,10 @@ public class GameManager : MonoBehaviour
     public int rock = 0;
     public int wood = 0;
     public bool city = true;
+    public AudioSource aud;
+    public AudioClip BuildSound;
+    public AudioClip failedBuild;
+    public Spawn spawn;
     private void Awake()
     {
         if (instance == null)
@@ -24,7 +28,10 @@ public class GameManager : MonoBehaviour
 
         DontDestroyOnLoad(this);
     }
-    
+    public void Start()
+    {
+        aud.volume = ConfigManager.instance.SFXVolum;
+    }
     public void setBuildId(int _id)
     {
         buildID = _id;
@@ -40,5 +47,22 @@ public class GameManager : MonoBehaviour
     public int getWoodCost()
     {
         return woodCost[buildID];
+    }
+    public void playAudio(bool build)
+    {
+        if (build)
+        {
+            aud.clip = BuildSound;
+            aud.Play();
+        }
+        else
+        {
+            aud.clip = failedBuild;
+            aud.Play();
+        }
+    }
+    public void spawnMS()
+    {
+        spawn.newSpawn();
     }
 }

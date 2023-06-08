@@ -33,12 +33,15 @@ public class Tile : MonoBehaviour
                         temp.transform.position = position;
                         built = true;
                         Debug.Log("New Build");
+                        GameManager.instance.playAudio(true);
+                        GameManager.instance.spawnMS();
                     }
                     else
                     {
                         gameObject.GetComponent<Renderer>().material.color = new Color(0.78f, 0, 0, 1);
                         notMoney = true;
                         timeChange = 0.0f;
+                        GameManager.instance.playAudio(false);
                     }
                 }
             }

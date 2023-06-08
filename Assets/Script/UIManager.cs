@@ -13,11 +13,13 @@ public class UIManager : MonoBehaviour
     public Button bot;
     public Sprite city;
     public Sprite forest;
+    public AudioSource aud;
     void Start()
     {
         rock.text = GameManager.instance.rock.ToString();
         wood.text = GameManager.instance.wood.ToString();
         newMensege("HOLA");
+        aud.volume = ConfigManager.instance.musicVolum;
     }
 
     // Update is called once per frame

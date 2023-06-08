@@ -20,6 +20,7 @@ public class Props : MonoBehaviour
             {
                 GameManager.instance.rock += cant;
             }
+            GameManager.instance.playAudio(true);
             Destroy(this.gameObject);
         }
     }
